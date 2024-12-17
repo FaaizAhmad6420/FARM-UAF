@@ -1,0 +1,73 @@
+<%= render 'home/topbar' %>
+
+<div class="container">
+  <%= render 'layouts/messages' %>
+
+  <div class="row">
+    <div class="col-md my-3">
+      <div class="card">
+        <% if @product.image.attached? %>
+          <%= image_tag url_for(@product.image), class: "card-img-top", alt: @product.name %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md my-3">
+      <h1><%= @product.name %></h1>
+      <h4>$<%= @product.price %></h4>
+      <br>
+
+      <% if @product.description.present? %>
+        <h5>Description:</h5>
+        <p><%= @product.description %></p>
+      <% end %>
+
+      <h5>Category: <%= @product.category.display_name %></h5>
+      <br>
+      <% available_sizes = @sizes.select { |size| @product.product_sizes.find_by(size: size)&.quantity.to_i > 0 } %>
+
+      <% if available_sizes.any? %>
+        <h5>Sizes:</h5>
+        
+        <% @sizes.each do |size| %>
+          <% product_size = @product.product_sizes.find_by(size: size) %>
+
+          <% if product_size && product_size.quantity > 0 %>
+            <a href="#" class="btn btn-outline-dark size-btn" data-size="<%= size.id %>" data-quantity="<%= product_size.quantity %>"><%= size.display_name %></a>
+          <% else %>
+            <a href="#" class="btn btn-outline-dark size-btn disabled" aria-disabled="true" data-size="<%= size.id %>" data-quantity="0">
+              <%= size.display_name %> - Sold Out
+            </a>
+          <% end %>
+        <% end %>
+
+        <br>
+        <br>
+        <h5>Quantity:</h5>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="input-group">
+              <button class="btn btn-secondary" id="decreaseQuantity" disabled>−</button>
+              <input type="text" id="quantity" name="quantity" value="1" min="1" class="form-control text-center" readonly>
+              <button class="btn btn-secondary" id="increaseQuantity" disabled>+</button>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <%= form_with url: add_to_cart_product_path(@product), method: :post, local: true, id: 'add-to-cart-form' do %>
+          <%= hidden_field_tag :size_id, '', id: 'form-size-id' %>
+          <%= hidden_field_tag :quantity, '1', id: 'form-quantity' %>
+          <%= submit_tag 'Add to Cart', class: 'btn btn-primary', id: 'add-to-cart', disabled: true %>
+        <% end %>
+
+      <% else %>
+        <p class="text-danger"><strong>Sold Out</strong></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render 'home/footer' %>

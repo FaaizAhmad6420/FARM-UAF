@@ -1,5 +1,5 @@
 class ProductController < ApplicationController
-  before_action :authenticate_customer!
+  before_action :authenticate_user!
   before_action :set_cart_items, only: [:index, :show]
   before_action :set_product, only: [:show, :add_to_cart]
 
@@ -23,7 +23,7 @@ class ProductController < ApplicationController
 
       if @product.product_sizes.exists?(size_id: size_id)
         cart_item = Cart.find_or_initialize_by(
-          order: order,
+          order_id: order.id,
           product: @product,
           size_id: size_id
         )
@@ -49,4 +49,5 @@ class ProductController < ApplicationController
     def set_product
       @product = Product.find(params[:id])
     end
+
 end

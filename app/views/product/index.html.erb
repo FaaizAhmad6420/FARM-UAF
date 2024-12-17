@@ -1,0 +1,123 @@
+<%= render 'home/topbar' %>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-5" style="background: linear-gradient(to right, hsla(140, 58%, 46%, 0.733), #ff9901a4);">
+    <a href="index.html" class="navbar-brand d-flex d-lg-none">
+        <h1 class="m-0 display-4 text-secondary"><span class="text-white">Farm</span>@Uaf</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav mx-auto py-0">
+            <a href="index.html" class="nav-item nav-link">Home</a>
+            <a href="about.html" class="nav-item nav-link">About</a>
+            <a href="service.html" class="nav-item nav-link">Service</a>
+            <a href="product.html" class="nav-item nav-link active">Product</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu m-0">
+                    <a href="feature.html" class="dropdown-item">Features</a>
+                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                </div>
+            </div>
+            <a href="contact.html" class="nav-item nav-link">Contact</a>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+
+<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 bg-hero mb-5">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h1 class="display-1 text-white mb-md-4">Our Products</h1>
+                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+                <a href="" class="btn btn-secondary py-md-3 px-md-5">Products</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+
+<!-- Products Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+            <h6 class="text-primary text-uppercase">Products</h6>
+            <h1 class="display-5">Our Fresh & Organic Products</h1>
+        </div>
+        <% @products.each do |product| %>
+        <div class="col-md-4 my-3 ">
+          <div class="card">
+            <% if product.image.attached? %>
+              <%= image_tag url_for(product.image), class: "card-img-top", alt: product.name, width: 200, height: 300 %>
+            <% end %>
+
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %> $<%= product.price %></h5>
+              <a href="<%= product_path(product) %>" class="btn btn-primary">Show</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      <div class="pag-bar d-flex justify-content-center mt-4">
+        <%== pagy_bootstrap_nav(@pagy) %>
+      </div>
+<!-- Products End -->
+
+
+<!-- Features Start -->
+<div class="container-fluid bg-primary feature py-5 pb-lg-0 my-5">
+    <div class="container py-5 pb-lg-0">
+        <div class="mx-auto text-center mb-3 pb-2" style="max-width: 500px;">
+            <h6 class="text-uppercase text-secondary">Features</h6>
+            <h1 class="display-5 text-white">Why Choose Us!!!</h1>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-3">
+                <div class="text-white mb-5">
+                    <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa fa-seedling fs-4 text-white"></i>
+                    </div>
+                    <h4 class="text-white">100% Organic</h4>
+                    <p class="mb-0">We norrish the best quality of fruits and vegetables</p>
+                </div>
+                <div class="text-white">
+                    <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa fa-award fs-4 text-white"></i>
+                    </div>
+                    <h4 class="text-white">Award Winning</h4>
+                    <p class="mb-0">Award-winning, 100% organic vegetables, naturally grown for a healthier future.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-block bg-white h-100 text-center p-5 pb-lg-0">
+                    <p>We specialize in 100% organic vegetables, grown without the use of harmful chemicals. Our commitment to sustainability ensures that you receive fresh, natural produce. With a focus on quality and health, we provide the best for you and the environment.</p>
+                    <img class="img-fluid" src="img/feature.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="text-white mb-5">
+                    <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa fa-tractor fs-4 text-white"></i>
+                    </div>
+                    <h4 class="text-white">Modern Farming</h4>
+                    <p class="mb-0">Our approach to modern farming combines innovative  organic production</p>
+                </div>
+                <div class="text-white">
+                    <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa fa-phone-alt fs-4 text-white"></i>
+                    </div>
+                    <h4 class="text-white">24/7 Support</h4>
+                    <p class="mb-0">We offer 24/7 Support service</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Features Start -->
+
+<%= render 'home/footer' %>

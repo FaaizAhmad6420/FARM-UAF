@@ -1,0 +1,48 @@
+<%= render 'home/topbar' %>
+<div class="container">
+  <%= render 'layouts/messages' %>
+  <h1>Order Summary</h1>
+  <p>Order ID: <%= @order.id %></p>
+  <p>Order Date: <%= @order.created_at.strftime('%B %d, %Y') %></p>
+
+  <h2>Items</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Size</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @order.carts.each_with_index do |cart_item, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= image_tag(cart_item.product.image, size: "100x100") if cart_item.product.image.attached? %></td>
+          <td><%= cart_item.product.name %></td>
+          <td><%= cart_item.size.display_name %></td>
+          <td><%= cart_item.quantity %></td>
+          <td>$<%= cart_item.price %></td>
+          <td>$<%= cart_item.quantity * cart_item.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="5"></td>
+        <td><strong>Total:</strong></td>
+        <td>$<%= @order.carts.sum { |item| item.quantity * item.price } %></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary' %>
+</div>
+
+<%= render 'home/footer' %>

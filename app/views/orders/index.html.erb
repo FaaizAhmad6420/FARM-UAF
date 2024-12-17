@@ -1,0 +1,41 @@
+<%= render 'product/navigation' %>
+<div class="container">
+  <%= render 'layouts/messages' %>
+  <h1>Your Orders</h1>
+
+  <div class="accordion">
+    <% if @orders.any? %>
+      <% @orders.each do |order| %>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= order.id %>" aria-expanded="true">
+              <strong>Order #<%= order.id %></strong> - Placed on <%= order.created_at.strftime('%B %d, %Y') %> - $<%= order.carts.sum { |item| item.quantity * item.price } %>
+            </button>
+          </h2>
+
+          <div id="<%= order.id %>" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <ol>
+                <% order.carts.each do |cart_item| %>
+                  <li>
+                    <%= image_tag(cart_item.product.image, size: "100x100") if cart_item.product.image.attached? %>
+                    <%= cart_item.product.name %> -
+                    <%= cart_item.size.display_name %> -
+                    <%= number_to_currency(cart_item.price) %> ×
+                    <%= cart_item.quantity %>
+                  </li>
+
+                  <br>
+                <% end %>
+              </ol>
+
+              <a href="<%= order_path(order) %>" class="btn btn-primary">Summary</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You haven't placed any orders yet.</p>
+  <% end %>
+</div>
