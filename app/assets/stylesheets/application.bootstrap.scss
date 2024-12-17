@@ -1,2 +1,24 @@
-@import 'bootstrap/scss/bootstrap';
+
 @import 'bootstrap-icons/font/bootstrap-icons';
+// Bootstrap Variables Customization
+$primary: #34AD54;
+$secondary: #FF9933;
+$light: #F6FFF2;
+$dark: #263A4F;
+
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$headings-font-family: 'Roboto', sans-serif;
+$body-color: #8D9AA8;
+$headings-color: $dark;
+$headings-font-weight: 700;
+$display-font-weight: 700;
+$enable-responsive-font-sizes: true;
+$border-radius: false;
+$link-decoration: none;
+$enable-negative-margins: true;
+
+// Import Bootstrap SCSS from node_modules
+
+/******* Customized Bootstrap ********/
+@import "bootstrap/scss/bootstrap";
+
