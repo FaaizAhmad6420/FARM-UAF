@@ -17,13 +17,17 @@
                 <a href="<%= service_path %>" class="nav-item nav-link">Service</a>
                 <a href="<%= product_index_path %>" class="nav-item nav-link">Product</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
                     <div class="dropdown-menu m-0">
-                        <a href="feature.html" class="dropdown-item">Features</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="<%= product_index_path %>" class="dropdown-item">All</a>
+
+                    <% @categories.each do |category| %>
+                        <%= link_to category.category.capitalize() , product_index_path(q: { category_id_eq: category.id }), class: "dropdown-item" %>
+                    <% end %>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="<%= contact_path %>" class="nav-item nav-link">Contact</a>
+                <a href="<%= blogs_path %>" class="nav-item nav-link">Blogs</a>
             </div>
         </div>
     </nav>

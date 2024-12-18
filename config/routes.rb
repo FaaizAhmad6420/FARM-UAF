@@ -21,7 +21,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :blogs, only: [:index, :show]
+
   root "home#index"
   get "about" => "home#about"
   get "service" => "home#service"
+  get "contact" => "home#contact"
 end

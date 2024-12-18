@@ -2,6 +2,7 @@ class ProductController < ApplicationController
   before_action :authenticate_user!
   before_action :set_cart_items, only: [:index, :show]
   before_action :set_product, only: [:show, :add_to_cart]
+  before_action :set_categories, only: [:show]
 
   def index
     @q = Product.ransack(params[:q])
@@ -48,6 +49,10 @@ class ProductController < ApplicationController
 
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def set_categories
+      @categories = Category.all
     end
 
 end

@@ -16,13 +16,17 @@
                 <a href="<%= service_path %>" class="nav-item nav-link">Service</a>
                 <a href="<%= product_index_path %>" class="nav-item nav-link">Product</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
                     <div class="dropdown-menu m-0">
-                        <a href="feature.html" class="dropdown-item">Features</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="<%= product_index_path %>" class="dropdown-item">All</a>
+
+                    <% @categories.each do |category| %>
+                        <%= link_to category.category.capitalize() , product_index_path(q: { category_id_eq: category.id }), class: "dropdown-item" %>
+                    <% end %>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="<%= contact_path %>" class="nav-item nav-link">Contact</a>
+                <a href="<%= blogs_path %>" class="nav-item nav-link">Blogs</a>
             </div>
         </div>
     </nav>
@@ -285,113 +289,5 @@
     </div>
     <!-- Features Start -->
 
-
-    <!-- Products Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
-                <h6 class="text-primary text-uppercase">Products</h6>
-                <h1 class="display-5">Our Fresh & Organic Products</h1>
-            </div>
-            <div class="owl-carousel product-carousel px-5">
-                <div class="pb-5">
-                    <div class="product-item position-relative bg-white d-flex flex-column text-center">
-                        <%= image_tag 'product-1.png', class: 'img-fluid mb-4', alt: 'Image' %>
-                        <h6 class="mb-3">Organic Vegetable</h6>
-                        <h5 class="text-primary mb-0">$19.00</h5>
-                        <div class="btn-action d-flex justify-content-center">
-                            <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
-                            <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-5">
-                    <div class="product-item position-relative bg-white d-flex flex-column text-center">
-                        <%= image_tag 'product-2.png', class: 'img-fluid mb-4', alt: 'Image' %>
-                        <h6 class="mb-3">Organic Vegetable</h6>
-                        <h5 class="text-primary mb-0">$19.00</h5>
-                        <div class="btn-action d-flex justify-content-center">
-                            <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
-                            <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-5">
-                    <div class="product-item position-relative bg-white d-flex flex-column text-center">
-                        <%= image_tag 'product-1.png', class: 'img-fluid mb-4', alt: 'Image' %>
-                        <h6 class="mb-3">Organic Vegetable</h6>
-                        <h5 class="text-primary mb-0">$19.00</h5>
-                        <div class="btn-action d-flex justify-content-center">
-                            <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
-                            <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-5">
-                    <div class="product-item position-relative bg-white d-flex flex-column text-center">
-                        <%= image_tag 'product-2.png', class: 'img-fluid mb-4', alt: 'Image' %>
-                        <h6 class="mb-3">Organic Vegetable</h6>
-                        <h5 class="text-primary mb-0">$19.00</h5>
-                        <div class="btn-action d-flex justify-content-center">
-                            <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
-                            <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-5">
-                    <div class="product-item position-relative bg-white d-flex flex-column text-center">
-                        <%= image_tag 'product-1.png', class: 'img-fluid mb-4', alt: 'Image' %>
-                        <h6 class="mb-3">Organic Vegetable</h6>
-                        <h5 class="text-primary mb-0">$19.00</h5>
-                        <div class="btn-action d-flex justify-content-center">
-                            <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
-                            <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Products End -->
-
-    <!-- Blog Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
-                <h6 class="text-primary text-uppercase">Our Blog</h6>
-                <h1 class="display-5">Latest Articles From Our Blog Post</h1>
-            </div>
-            <div class="row g-5">
-                <div class="col-lg-4">
-                    <div class="blog-item position-relative overflow-hidden">
-                        <%= image_tag 'blog-1.jpg', class: 'img-fluid', alt: 'Image' %>
-                        <a class="blog-overlay" href="">
-                            <h4 class="text-white">Sustainable Farming Practices for a Greener Tomorrow</h4>
-                            <span class="text-white fw-bold">Oct 17, 2024</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog-item position-relative overflow-hidden">
-                        <%= image_tag 'blog-2.jpg', class: 'img-fluid', alt: 'Image' %>
-                        <a class="blog-overlay" href="">
-                            <h4 class="text-white">Fresh and Healthy Organic Vegetables for Every Home</h4>
-                            <span class="text-white fw-bold">Dec 15, 2024</span> 
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog-item position-relative overflow-hidden">
-                        <%= image_tag 'blog-3.jpg', class: 'img-fluid', alt: 'Image' %>
-                        <a class="blog-overlay" href="">
-                            <h4 class="text-white">Innovative Techniques to Enhance Crop Quality</h4>
-                            <span class="text-white fw-bold">Nov 01, 2024</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Blog End -->
 
     <%= render 'footer' %>

@@ -1,0 +1,63 @@
+<%= render 'home/topbar' %>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-5" style="background: linear-gradient(to right, hsla(140, 58%, 46%, 0.733), #ff9901a4);">
+    <a href="index.html" class="navbar-brand d-flex d-lg-none">
+        <h1 class="m-0 display-4 text-secondary"><span class="text-white">Farm</span>@Uaf</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav mx-auto py-0">
+            <a href="<%= root_path %>" class="nav-item nav-link">Home</a>
+            <a href="<%= about_path %>" class="nav-item nav-link">About</a>
+            <a href="<%= service_path %>" class="nav-item nav-link">Service</a>
+            <a href="<%= product_index_path %>" class="nav-item nav-link">Product</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
+                <div class="dropdown-menu m-0">
+                    <a href="<%= product_index_path %>" class="dropdown-item">All</a>
+
+                    <% @categories.each do |category| %>
+                        <%= link_to category.category.capitalize() , product_index_path(q: { category_id_eq: category.id }), class: "dropdown-item" %>
+                    <% end %>
+                </div>
+            </div>
+            <a href="<%= contact_path %>" class="nav-item nav-link">Contact</a>
+            <a href="<%= blogs_path %>" class="nav-item nav-link active">Blogs</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+  <%= render 'layouts/messages' %>
+
+  <div class="row">
+    <!-- Image Section -->
+    <div class="col-md my-3">
+      <div class="card">
+        <% if @blog.image.attached? %>
+          <%= image_tag url_for(@blog.image), class: "card-img-top", alt: @blog.title %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="col-md my-3">
+      <h1><%= @blog.title %></h1>
+      <p class="text-muted"><%= @blog.created_at.strftime('%B %d, %Y') %></p>
+      <br>
+
+      <% if @blog.description.present? %>
+        <h5>Description:</h5>
+        <p><%= simple_format(@blog.description) %></p>
+      <% end %>
+
+      
+
+      
+    </div>
+  </div>
+</div>
+
+<%= render 'home/footer' %>

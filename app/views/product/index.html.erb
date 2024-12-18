@@ -9,18 +9,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto py-0">
-            <a href="index.html" class="nav-item nav-link">Home</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="service.html" class="nav-item nav-link">Service</a>
-            <a href="product.html" class="nav-item nav-link active">Product</a>
+            <a href="<%= root_path %>" class="nav-item nav-link">Home</a>
+            <a href="<%= about_path %>" class="nav-item nav-link">About</a>
+            <a href="<%= service_path %>" class="nav-item nav-link">Service</a>
+            <a href="<%= product_index_path %>" class="nav-item nav-link active">Product</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
                 <div class="dropdown-menu m-0">
-                    <a href="feature.html" class="dropdown-item">Features</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                    <a href="<%= product_index_path %>" class="dropdown-item">All</a>
+
+                    <% @categories.each do |category| %>
+                        <%= link_to category.category.capitalize() , product_index_path(q: { category_id_eq: category.id }), class: "dropdown-item" %>
+                    <% end %>
                 </div>
             </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="<%= contact_path %>" class="nav-item nav-link">Contact</a>
+            <a href="<%= blogs_path %>" class="nav-item nav-link">Blogs</a>
         </div>
     </div>
 </nav>
@@ -47,21 +51,34 @@
         <div class="mx-auto text-center mb-5" style="max-width: 500px;">
             <h6 class="text-primary text-uppercase">Products</h6>
             <h1 class="display-5">Our Fresh & Organic Products</h1>
-        </div>
-        <% @products.each do |product| %>
-        <div class="col-md-4 my-3 ">
-          <div class="card">
-            <% if product.image.attached? %>
-              <%= image_tag url_for(product.image), class: "card-img-top", alt: product.name, width: 200, height: 300 %>
-            <% end %>
 
-            <div class="card-body">
-              <h5 class="card-title"><%= product.name %> $<%= product.price %></h5>
-              <a href="<%= product_path(product) %>" class="btn btn-primary">Show</a>
-            </div>
-          </div>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" name="q[name_cont]" placeholder="Search" aria-label="Search" style="width: 714px;">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
         </div>
-      <% end %>
+
+      <div class="product container-fluid">
+                <div class="container">
+                    <% @products.each do |product| %>
+                    <div class="card">
+                        <% if product.image.attached? %>
+                            <%= image_tag url_for(product.image), class: "card-img-top", alt: product.name, width: 200, height: 300 %>
+                        <% end %>
+                        <div class="hs">
+                            <p><%= product.name %></p>
+                             <p>$<%= product.price %>/kg</p>
+                        </div>
+                        <div class="bs">
+                            <a href="<%= product_path(product) %>">
+                            <button>Show More</button>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
       
       <div class="pag-bar d-flex justify-content-center mt-4">
         <%== pagy_bootstrap_nav(@pagy) %>

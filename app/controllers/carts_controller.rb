@@ -1,4 +1,5 @@
 class CartsController < UsersController
+  before_action :authenticate_user!
   def show
     @order = current_order
     @cart_items = @order.carts.includes(:product, :size) if @order
