@@ -14,8 +14,8 @@
         </div>
         <div class="col-lg-3">
             <div class="d-flex align-items-center justify-content-end">
-                <% if current_user %>
-                    <a class="btn btn-primary btn-square me-2 btn-sm" href="<%= cart_path(current_user) %>">
+                <% if user_signed_in?  %>
+                    <a class="btn btn-outline-primary btn-square me-2 btn-sm" href="<%= cart_path(current_user) %>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                           <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                         </svg>
@@ -23,8 +23,37 @@
                           <%= @cart_items.count %>
                         </span>
                     </a>
+                    <%#= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+                    <% if current_user.avatar.attached? %>
+                <div class="btn btn-outline-primary dropdown btn-sm ms-1">
+                  <% else %>
+                  <div class="btn btn-outline-primary dropdown ms-1">
+                  <% end %>
+
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <% if current_user.avatar.attached? %>
+              <%= image_tag url_for(current_user.avatar), class: "rounded-circle me-2", alt: current_user.email, width: 32, height: 32 %>
+            <% end %>
+            <%= current_user.username.present? ? current_user.username : current_user.email %>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="<%= users_path %>">Profile</a></li>
+            <li><%= button_to "Sign Out", destroy_user_session_path, class: "dropdown-item", method: :delete %></li>
+          </ul>
+        </div>
+        <% else %>
+        <a class="btn btn-outline-primary btn-square me-2 btn-sm" href="<%= new_user_session_path %>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                        <span class="translate-middle badge rounded-pill bg-danger">
+                          0
+                        </span>
+                    </a>
+                    <%= button_to "Login", new_user_session_path, class: "btn btn-outline-primary" %>
                 <% end %>
-                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+                
             </div>
         </div>
     </div>

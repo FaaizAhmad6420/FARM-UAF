@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     before_action :set_categories
 
     def index
@@ -11,6 +11,12 @@ class HomeController < ApplicationController
     end
 
     def contact
+    end
+
+    def testimonial
+    end
+
+    def feature
     end
     private
 

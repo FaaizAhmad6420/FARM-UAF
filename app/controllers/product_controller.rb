@@ -1,6 +1,6 @@
 class ProductController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_cart_items, only: [:index, :show]
+  before_action :authenticate_user!, only: [:add_to_cart]
+  # before_action :set_cart_items, only: [:index, :show]
   before_action :set_product, only: [:show, :add_to_cart]
   before_action :set_categories, only: [:show]
 
@@ -19,7 +19,7 @@ class ProductController < ApplicationController
     quantity = params[:quantity].to_i
 
     if size_id.present? && quantity > 0
-      size = Size.find(size_id)
+      # size = Size.find(size_id)
       order = current_order
 
       if @product.product_sizes.exists?(size_id: size_id)
@@ -43,9 +43,9 @@ class ProductController < ApplicationController
   end
 
   private
-    def set_cart_items
-      @cart_items = current_order.carts
-    end
+    # def set_cart_items
+    #   @cart_items = current_order.carts
+    # end
 
     def set_product
       @product = Product.find(params[:id])

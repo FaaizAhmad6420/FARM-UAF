@@ -1,5 +1,6 @@
 <%= render 'topbar' %>
 
+<%= render 'layouts/messages' %>
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-5" style="background: linear-gradient(to right, hsla(140, 58%, 46%, 0.733), #ff9901a4);">
         <a href="index.html" class="navbar-brand d-flex d-lg-none">
             <h1 class="m-0 display-4 text-secondary"><span class="text-white">Farm</span>@Uaf</h1>
@@ -12,15 +13,22 @@
                 <a href="<%= root_path %>" class="nav-item nav-link">Home</a>
                 <a href="<%= about_path %>" class="nav-item nav-link">About</a>
                 <a href="<%= service_path %>" class="nav-item nav-link">Service</a>
-                <a href="<%= product_index_path %>" class="nav-item nav-link">Product</a>
+                
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Product</a>
                     <div class="dropdown-menu m-0">
                         <a href="<%= product_index_path %>" class="dropdown-item">All</a>
 
                     <% @categories.each do |category| %>
                         <%= link_to category.category.capitalize() , product_index_path(q: { category_id_eq: category.id }), class: "dropdown-item" %>
                     <% end %>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="<%= feature_path %>" class="dropdown-item">Feature</a>
+                        <a href="<%= testimonial_path %>" class="dropdown-item">Testimonial</a>
                     </div>
                 </div>
                 <a href="<%= contact_path %>" class="nav-item nav-link active">Contact</a>

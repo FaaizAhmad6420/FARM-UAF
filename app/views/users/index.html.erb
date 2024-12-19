@@ -1,0 +1,27 @@
+<%= render 'home/topbar' %>
+<%= render 'layouts/messages' %>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="profile-container">
+        <div class="profile-image">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag url_for(current_user.avatar), class: "me-2", alt: current_user.email, width: 32, height: 32 %>
+          <% end %>
+        </div>
+
+        <div class="profile-details">
+          <h2><%= current_user.username %></h2>
+          <p><strong>Email:</strong> <%= current_user.email %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <%= link_to "Return", :back, class: 'btn btn-danger'%>
+      <a href="<%= edit_user_registration_path %>" class="btn btn-primary">Edit Profile</a>
+    </div>
+  </div>
+</div>
+<%= render 'home/footer' %>

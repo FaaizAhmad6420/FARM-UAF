@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   get "about" => "home#about"
   get "service" => "home#service"
   get "contact" => "home#contact"
+  get "testimonial" => "home#testimonial"
+  get "feature" => "home#feature"
 end
