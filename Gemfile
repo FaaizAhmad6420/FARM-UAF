@@ -79,3 +79,7 @@ gem 'sassc'
 gem 'ransack'
 
 gem 'pagy'
+
+gem 'dotenv-rails'
+
+gem 'redcarpet'

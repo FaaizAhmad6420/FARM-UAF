@@ -29,4 +29,7 @@ Rails.application.routes.draw do
   get "contact" => "home#contact"
   get "testimonial" => "home#testimonial"
   get "feature" => "home#feature"
+
+  get 'generate', to: 'generative#generate'
+  post 'generate', to: 'generative#generate'
 end

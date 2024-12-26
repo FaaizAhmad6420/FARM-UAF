@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "response_frame" do %>
+  <% if @response.present? %>
+    <div>
+      <strong>Generated Content:</strong>
+      <div><%= @response.html_safe %></div>
+    </div>
+  <% else %>
+    <p>No content generated yet.</p>
+  <% end %>
+<% end %>
+
