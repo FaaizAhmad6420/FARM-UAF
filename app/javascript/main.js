@@ -114,17 +114,6 @@ document.addEventListener("turbo:load", function () {
   });
 
   // Decrease Quantity Button
-  // decreaseQuantityButton.addEventListener("click", function (event) {
-  //   event.preventDefault();
-  //   const currentQuantity = parseInt(quantityInput.value);
-  //   if (currentQuantity > 1) {
-  //     quantityInput.value = currentQuantity - 1;
-  //     formQuantityInput.value = currentQuantity - 1;
-  //   }
-  // });
-
-
-  // Decrease Quantity Button
   if (decreaseQuantityButton) {
     decreaseQuantityButton.addEventListener("click", decrease);
   }
