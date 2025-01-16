@@ -96,6 +96,9 @@ document.addEventListener("turbo:load", function () {
   const addToCartButton = document.getElementById("add-to-cart");
   const decreaseQuantityButton = document.getElementById("decreaseQuantity");
   const increaseQuantityButton = document.getElementById("increaseQuantity");
+  const priceDisplay = document.getElementById("price-display");
+  let basePrice = parseFloat(priceDisplay ? priceDisplay.innerHTML : 0); 
+  
 
   sizeButtons.forEach((button) => {
     button.addEventListener("click", function (event) {
@@ -104,14 +107,21 @@ document.addEventListener("turbo:load", function () {
       this.classList.add("active");
       formSizeInput.value = this.getAttribute("data-size");
       const maxQuantity = parseInt(this.getAttribute("data-quantity"));
+      const sizeMultiplier = parseFloat(this.getAttribute("data-multiplier"));
       quantityInput.max = maxQuantity;
       quantityInput.value = 1;
       formQuantityInput.value = 1;
       addToCartButton.disabled = false;
       decreaseQuantityButton.disabled = false;
       increaseQuantityButton.disabled = false;
+
+      if (priceDisplay) {
+      const updatedPrice = (basePrice * sizeMultiplier).toFixed(1);
+      priceDisplay.textContent = `${updatedPrice}`;
+    }
     });
   });
+
 
   // Decrease Quantity Button
   if (decreaseQuantityButton) {
