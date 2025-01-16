@@ -1,0 +1,24 @@
+
+  <!-- Ai__Start -->
+    <!-- Floating AI Button -->
+    <button id="ai-button" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 80px; right: 30px; z-index: 1000; color:black; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: opacity 0.3s; opacity: 0.7;">
+  <span class="material-symbols-outlined animate-bounce">smart_toy</span>
+</button>
+
+    <!-- AI Aside Section -->
+    <aside id="ai-aside" class="ai-aside h-[90%]" style="display: none; position: fixed; bottom: 30px; right: 100px; transform: translateY(0); background: #f9f9f9;border-radius: 15px; border: 1px solid #ddd; padding: 20px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); z-index: 999; display: flex; flex-direction: column; justify-content: space-between;">
+  <button id="close-ai" onclick="toggleAIAside()" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 20px; color: #666;">&times;</button>
+  <p style="color: #666;">Your AI assistant is here to help!</p>
+  <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center;">
+    <!-- Display the response here -->
+    <div id="ai-response-container" style="width: 300px; height: 300px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); overflow-y: auto;">
+  <%= @response.is_a?(String) ? @response.html_safe : @response %>
+</div>
+  </div>
+
+  <form class="d-flex" style="margin-top: 10px; display: flex; justify-content:center; align-items: center;" action="/generate" method="post">
+    <input class="form-control me-2" type="text" name="prompt" placeholder="Enter your query..." aria-label="Search" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    <button id="submit-ai" class="btn btn-primary" type="submit" style="margin-left: 10px; background-color: #007bff; color: white; border-radius: 8px; padding: 10px 15px; border: none;"><i class="bi bi-cursor-fill"></i></button>
+  </form>
+</aside>
+    <!-- Ai__End -->

@@ -123,7 +123,7 @@
             <div class="col-lg-6">
                 <div class="d-block bg-white h-100 text-center p-5 pb-lg-0">
                     <p>We specialize in 100% organic vegetables, grown without the use of harmful chemicals. Our commitment to sustainability ensures that you receive fresh, natural produce. With a focus on quality and health, we provide the best for you and the environment.</p>
-                    <img class="img-fluid" src="img/feature.png" alt="">
+                    <%= image_tag 'feature.png', alt: 'Image', class: "img-fluid" %>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -147,4 +147,5 @@
 </div>
 <!-- Features Start -->
 
-<%= render 'home/footer' %>
+<%= render 'home/ai' %>
+    <%= render 'home/footer' %>

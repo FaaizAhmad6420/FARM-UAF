@@ -4,4 +4,3 @@
 //= link_tree ../builds
 //= link custom.css
 //= link card.css
-//= link custom.js

@@ -127,6 +127,10 @@ GEM
       responders
       warden (~> 1.2.3)
     devise-bootstrap-views (1.1.0)
+    dotenv (3.1.7)
+    dotenv-rails (3.1.7)
+      dotenv (= 3.1.7)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
     ffi (1.17.0-aarch64-linux-gnu)
@@ -274,6 +278,7 @@ GEM
       i18n
     rdoc (6.9.0)
       psych (>= 4.0.0)
+    redcarpet (3.6.0)
     regexp_parser (2.9.3)
     reline (0.5.12)
       io-console (~> 0.5)
@@ -357,6 +362,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-bootstrap-views (~> 1.0)
+  dotenv-rails
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -364,6 +370,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.4)
   ransack
+  redcarpet
   sassc
   selenium-webdriver
   sprockets-rails
