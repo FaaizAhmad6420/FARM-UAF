@@ -51,7 +51,7 @@
 
     <div class="col-md my-3">
       <h1><%= @product.name %></h1>
-      <h4>$<%= @product.price %></h4>
+      <h4 id="product-price" data-base-price="<%= @product.price %>">$<span id="price-display"><%= @product.price %></span></h4>
       <br>
 
       <% if @product.description.present? %>
@@ -70,7 +70,7 @@
           <% product_size = @product.product_sizes.find_by(size: size) %>
 
           <% if product_size && product_size.quantity > 0 %>
-            <a href="#" class="btn btn-outline-dark size-btn" data-size="<%= size.id %>" data-quantity="<%= product_size.quantity %>"><%= size.display_name %></a>
+            <a href="#" class="btn btn-outline-dark size-btn" data-size="<%= size.id %>" data-quantity="<%= product_size.quantity %>" data-multiplier="<%= size.multiplier %>"><%= size.display_name %></a>
           <% else %>
             <a href="#" class="btn btn-outline-dark size-btn disabled" aria-disabled="true" data-size="<%= size.id %>" data-quantity="0">
               <%= size.display_name %> - Sold Out
