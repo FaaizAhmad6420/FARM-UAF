@@ -29,8 +29,8 @@ class GenerativeController < ApplicationController
     end
 
     respond_to do |format|
-      format.turbo_stream
-      format.html # Fallback for non-JS requests
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('ai-response-container', partial: 'home/ai_response', locals: { response: @response }) }
+      format.html { render 'home/index' } # Or any fallback HTML action you want
     end
   end
 
@@ -41,7 +41,4 @@ class GenerativeController < ApplicationController
     markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     markdown.render(content)
   end
-
 end
-
-
