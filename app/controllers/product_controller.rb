@@ -22,7 +22,14 @@ class ProductController < ApplicationController
       # size = Size.find(size_id)
       order = current_order
 
-      if @product.product_sizes.exists?(size_id: size_id)
+      product_size = @product.product_sizes.find_by(size_id: size_id)
+
+      if product_size
+        size = product_size.size
+        size_multiplier = size.multiplier
+
+        price_for_size = @product.price * size_multiplier
+
         cart_item = Cart.find_or_initialize_by(
           order_id: order.id,
           product: @product,
@@ -35,7 +42,7 @@ class ProductController < ApplicationController
           cart_item.quantity = quantity
         end
 
-        cart_item.price = @product.price
+        cart_item.price = price_for_size
         cart_item.save
         redirect_to cart_path, notice: 'Product added to cart'
       end
