@@ -139,9 +139,8 @@
     background: var(--primary) !important;
 }
 
-.about i,
 .service-item i {
-    background-image: linear-gradient(var(--primary), var(--secondary));
+    background: var(--secondary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: .5s;
